@@ -69,7 +69,7 @@ describe('<Heading />', () => {
   it('should render a Heading with a secondary line color', () => {
     renderWithTheme(
       <Heading lineColor="secondary" lineLeft lineBottom>
-        Lorem Ispum
+        Lorem Ipsum
       </Heading>
     )
 
