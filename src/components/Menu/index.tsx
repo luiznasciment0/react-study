@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { useState } from 'react'
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import { ShoppingCart as ShoppingCartIcon } from '@styled-icons/material-outlined/ShoppingCart'
@@ -10,10 +12,10 @@ import MediaMatch from 'components/MediaMatch'
 import * as S from './styles'
 
 export type MenuProps = {
-  userName?: string
+  username?: string
 }
 
-const Menu = ({ userName }: MenuProps) => {
+const Menu = ({ username }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -25,13 +27,19 @@ const Menu = ({ userName }: MenuProps) => {
       </MediaMatch>
 
       <S.LogoWrapper>
-        <Logo hideOnMobile />
+        <Link href="/" passHref>
+          <a>
+            <Logo hideOnMobile />
+          </a>
+        </Link>
       </S.LogoWrapper>
 
       <MediaMatch greaterThan="medium">
         <S.MenuNav>
-          <S.MenuLink href="#">Home</S.MenuLink>
-          <S.MenuLink href="#">Explorer</S.MenuLink>
+          <Link href="/" passHref>
+            <S.MenuLink>Home</S.MenuLink>
+          </Link>
+          <S.MenuLink href="#">Explore</S.MenuLink>
         </S.MenuNav>
       </MediaMatch>
 
@@ -42,9 +50,11 @@ const Menu = ({ userName }: MenuProps) => {
         <S.IconWrapper>
           <ShoppingCartIcon aria-label="Open Shopping Cart" />
         </S.IconWrapper>
-        {!userName && (
+        {!username && (
           <MediaMatch greaterThan="medium">
-            <Button>Sign in</Button>
+            <Link href="/sign-in" passHref>
+              <Button as="a">Sign in</Button>
+            </Link>
           </MediaMatch>
         )}
       </S.MenuGroup>
@@ -52,9 +62,12 @@ const Menu = ({ userName }: MenuProps) => {
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
         <S.MenuNav>
-          <S.MenuLink href="#">Home</S.MenuLink>
-          <S.MenuLink href="#">Explorer</S.MenuLink>
-          {!!userName && (
+          <Link href="/" passHref>
+            <S.MenuLink>Home</S.MenuLink>
+          </Link>
+          <S.MenuLink href="#">Explore</S.MenuLink>
+
+          {!!username && (
             <>
               <S.MenuLink href="#">My account</S.MenuLink>
               <S.MenuLink href="#">Wishlist</S.MenuLink>
@@ -62,15 +75,17 @@ const Menu = ({ userName }: MenuProps) => {
           )}
         </S.MenuNav>
 
-        {!userName && (
+        {!username && (
           <S.RegisterBox>
-            <Button fullWidth size="large">
-              Log in now
-            </Button>
+            <Link href="/sign-in" passHref>
+              <Button fullWidth size="large" as="a">
+                Sign in
+              </Button>
+            </Link>
             <span>or</span>
-            <S.CreateAccount href="#" title="Sign up">
-              Sign Up
-            </S.CreateAccount>
+            <Link href="/sign-up" passHref>
+              <S.CreateAccount title="Sign Up">Sign Up</S.CreateAccount>
+            </Link>
           </S.RegisterBox>
         )}
       </S.MenuFull>
