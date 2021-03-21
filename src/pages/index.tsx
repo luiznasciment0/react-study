@@ -14,11 +14,11 @@ export function getServerSideProps() {
       newGames: gamesMock,
       mostPopularHighlight: highlightMock,
       mostPopularGames: gamesMock,
-      upcomingGames: gamesMock,
-      upcomingHighlight: highlightMock,
-      upcomingMoreGames: gamesMock,
+      upcommingGames: gamesMock,
+      upcommingHighligth: highlightMock,
+      upcommingMoreGames: gamesMock,
       freeGames: gamesMock,
-      freeHighlight: highlightMock
+      freeHighligth: highlightMock
     }
   }
 }
