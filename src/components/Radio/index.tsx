@@ -21,9 +21,7 @@ const Radio = ({
   ...props
 }: RadioProps) => {
   const onChange = () => {
-    if (onCheck) {
-      onCheck(value)
-    }
+    !!onCheck && onCheck(value)
   }
 
   return (
