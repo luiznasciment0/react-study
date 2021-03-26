@@ -2,8 +2,6 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 import { AddShoppingCart } from '@styled-icons/material/AddShoppingCart'
 import Button from '.'
 
-//@styled-icons/material/AddShoppingCart
-
 export default {
   title: 'Button',
   component: Button,
