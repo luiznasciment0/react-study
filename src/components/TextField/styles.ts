@@ -1,21 +1,9 @@
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export type WrapperProps = { hasIcon: boolean }
 
-const wrapperModifier = {
-  withIcon: (theme: DefaultTheme) => css`
-    svg {
-      width: 2rem;
-
-      & + input {
-        margin-left: ${theme.spacings.xxsmall};
-      }
-    }
-  `
-}
-
 export const InputWrapper = styled.div<WrapperProps>`
-  ${({ theme, hasIcon }) => css`
+  ${({ theme }) => css`
     display: flex;
     background: ${theme.colors.lightGray};
     border-radius: 0.2rem;
@@ -26,7 +14,6 @@ export const InputWrapper = styled.div<WrapperProps>`
     &:focus-within {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};
     }
-    ${hasIcon && wrapperModifier.withIcon(theme)}
   `}
 `
 
@@ -35,7 +22,7 @@ export const Input = styled.input`
     color: ${theme.colors.black};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xxsmall} 0;
+    padding: ${theme.spacings.xxsmall};
     background: transparent;
     border: 0;
     outline: none;
@@ -48,5 +35,17 @@ export const Label = styled.label`
     font-size: ${theme.font.sizes.small};
     color: ${theme.colors.black};
     cursor: pointer;
+  `}
+`
+
+export const Icon = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    width: 2.2rem;
+    color: ${theme.colors.gray};
+
+    & > svg {
+      width: 100%;
+    }
   `}
 `

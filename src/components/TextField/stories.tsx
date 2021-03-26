@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
-import { MailOutline } from '@styled-icons/material/MailOutline'
+import { Email } from '@styled-icons/material-outlined'
 
 import TextField, { TextFieldProps } from '.'
 
@@ -32,5 +32,5 @@ export const withIcon: Story = (args) => (
 )
 
 withIcon.args = {
-  icon: <MailOutline />
+  icon: <Email />
 }

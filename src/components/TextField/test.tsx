@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MailOutline } from '@styled-icons/material/MailOutline'
+import { Email } from '@styled-icons/material-outlined'
 
 import { renderWithTheme } from 'utils/tests/helpers'
 
@@ -62,7 +62,7 @@ describe('<TextField />', () => {
   it('should render an icon version', () => {
     renderWithTheme(
       <TextField
-        icon={<MailOutline data-testid="icon" />}
+        icon={<Email data-testid="icon" />}
         label="TextField"
         labelFor="TextField"
         id="TextField"
