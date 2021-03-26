@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MailOutline } from '@styled-icons/material/MailOutline'
 
 import { renderWithTheme } from 'utils/tests/helpers'
 
@@ -56,5 +57,19 @@ describe('<TextField />', () => {
 
     userEvent.tab()
     expect(input).toHaveFocus()
+  })
+
+  it('should render an icon version', () => {
+    renderWithTheme(
+      <TextField
+        icon={<MailOutline data-testid="icon" />}
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+      />
+    )
+
+    expect(screen.getByLabelText(/textfield/i)).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 })

@@ -1,7 +1,21 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
-export const InputWrapper = styled.div`
-  ${({ theme }) => css`
+export type WrapperProps = { hasIcon: boolean }
+
+const wrapperModifier = {
+  withIcon: (theme: DefaultTheme) => css`
+    svg {
+      width: 2rem;
+
+      & + input {
+        margin-left: ${theme.spacings.xxsmall};
+      }
+    }
+  `
+}
+
+export const InputWrapper = styled.div<WrapperProps>`
+  ${({ theme, hasIcon }) => css`
     display: flex;
     background: ${theme.colors.lightGray};
     border-radius: 0.2rem;
@@ -12,6 +26,7 @@ export const InputWrapper = styled.div`
     &:focus-within {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};
     }
+    ${hasIcon && wrapperModifier.withIcon(theme)}
   `}
 `
 

@@ -1,4 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
+import { MailOutline } from '@styled-icons/material/MailOutline'
+
 import TextField, { TextFieldProps } from '.'
 
 export default {
@@ -9,7 +11,8 @@ export default {
     labelFor: 'Email',
     id: 'Email',
     initialValue: '',
-    placeholder: 'john.cage@gmail.com'
+    placeholder: 'john.cage@gmail.com',
+    icon: ''
   },
   argTypes: {
     onInput: { action: 'changed' }
@@ -21,3 +24,13 @@ export const Default: Story<TextFieldProps> = (args) => (
     <TextField {...args} />
   </div>
 )
+
+export const withIcon: Story = (args) => (
+  <div style={{ maxWidth: 300, padding: 15 }}>
+    <TextField {...args} />
+  </div>
+)
+
+withIcon.args = {
+  icon: <MailOutline />
+}
