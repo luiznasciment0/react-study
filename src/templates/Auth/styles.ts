@@ -29,15 +29,35 @@ export const BannerBlock = styled.div`
 
 export const BannerContent = styled.div`
   ${({ theme }) => css`
+    display: grid;
+    grid-grid-template-columns: 1fr;
+    justify-content: space-between;
+    height: 100%;
     position: relative;
     color: ${theme.colors.white};
     z-index: ${theme.layers.base};
   `}
 `
 
-export const Subtitle = styled.h3``
+export const Subtitle = styled.h3`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.xxlarge};
+    font-weight: ${theme.font.light};
+    margin-top: ${theme.spacings.xxsmall};
 
-export const Footer = styled.p``
+    strong {
+      color: ${theme.colors.primary};
+    }
+  `}
+`
+
+export const Footer = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.xsmall};
+    align-self: end;
+    text-align: center;
+  `}
+`
 
 export const Content = styled.div`
   ${({ theme }) => css`
