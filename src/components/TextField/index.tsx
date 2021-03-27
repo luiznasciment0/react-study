@@ -8,6 +8,7 @@ export type TextFieldProps = {
   initialValue?: string
   icon?: React.ReactNode
   iconPosition?: 'left' | 'right'
+  disabled?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
 const TextField = ({
@@ -17,6 +18,7 @@ const TextField = ({
   onInput,
   icon,
   iconPosition = 'left',
+  disabled = false,
   ...props
 }: TextFieldProps) => {
   const [value, setValue] = useState(initialValue)
@@ -31,13 +33,25 @@ const TextField = ({
   const renderInput = (iconPosition: string, hasIcon: boolean) => {
     if (!hasIcon)
       return (
-        <S.Input type="text" onChange={onChange} value={value} {...props} />
+        <S.Input
+          type="text"
+          onChange={onChange}
+          value={value}
+          disabled={disabled}
+          {...props}
+        />
       )
 
     if (iconPosition === 'right') {
       return (
         <>
-          <S.Input type="text" onChange={onChange} value={value} {...props} />
+          <S.Input
+            type="text"
+            onChange={onChange}
+            value={value}
+            disabled={disabled}
+            {...props}
+          />
           <S.Icon>{icon}</S.Icon>
         </>
       )
@@ -46,18 +60,24 @@ const TextField = ({
     return (
       <>
         <S.Icon>{icon}</S.Icon>
-        <S.Input type="text" onChange={onChange} value={value} {...props} />
+        <S.Input
+          type="text"
+          onChange={onChange}
+          value={value}
+          disabled={disabled}
+          {...props}
+        />
       </>
     )
   }
 
   return (
-    <div>
+    <S.Wrapper disabled={disabled}>
       {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
       <S.InputWrapper hasIcon={!!icon}>
         {renderInput(iconPosition, !!icon)}
       </S.InputWrapper>
-    </div>
+    </S.Wrapper>
   )
 }
 

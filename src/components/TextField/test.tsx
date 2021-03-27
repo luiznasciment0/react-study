@@ -72,4 +72,45 @@ describe('<TextField />', () => {
     expect(screen.getByLabelText(/textfield/i)).toBeInTheDocument()
     expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
+
+  it('does not changes its value when disabled', async () => {
+    const onInput = jest.fn()
+    renderWithTheme(
+      <TextField
+        onInput={onInput}
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+        disabled
+      />
+    )
+
+    const input = screen.getByLabelText('TextField')
+    expect(input).toBeDisabled()
+
+    const text = 'Test y test'
+    userEvent.type(input, text)
+
+    await waitFor(() => {
+      expect(input).not.toHaveValue(text)
+    })
+    expect(onInput).not.toHaveBeenCalled()
+  })
+
+  it('is not accessible by tab when disabled', () => {
+    renderWithTheme(
+      <TextField
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+        disabled
+      />
+    )
+
+    const input = screen.getByLabelText('TextField')
+    expect(document.body).toHaveFocus()
+
+    userEvent.tab()
+    expect(input).not.toHaveFocus()
+  })
 })

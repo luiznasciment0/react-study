@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 export type WrapperProps = { hasIcon: boolean }
 
@@ -17,7 +17,9 @@ export const InputWrapper = styled.div<WrapperProps>`
   `}
 `
 
-export const Input = styled.input`
+import { TextFieldProps } from '.'
+
+export const Input = styled.input<TextFieldProps>`
   ${({ theme }) => css`
     color: ${theme.colors.black};
     font-family: ${theme.font.family};
@@ -30,11 +32,13 @@ export const Input = styled.input`
   `}
 `
 
-export const Label = styled.label`
-  ${({ theme }) => css`
+type LabelProps = Pick<TextFieldProps, 'disabled'>
+
+export const Label = styled.label<LabelProps>`
+  ${({ theme, disabled }) => css`
     font-size: ${theme.font.sizes.small};
-    color: ${theme.colors.black};
-    cursor: pointer;
+    color: ${disabled ? theme.colors.gray : theme.colors.black};
+    /* cursor: ${disabled ? 'not-allowed' : 'pointer'}; */
   `}
 `
 
@@ -47,5 +51,25 @@ export const Icon = styled.div`
     & > svg {
       width: 100%;
     }
+  `}
+`
+
+const wrapperModifiers = {
+  disabled: (theme: DefaultTheme) => css`
+    ${Label},
+    ${Input},
+    ${Icon} {
+      cursor: not-allowed;
+      color: ${theme.colors.gray};
+      &::placeholder {
+        color: currentColor;
+      }
+    }
+  `
+}
+
+export const Wrapper = styled.div<Pick<TextFieldProps, 'disabled'>>`
+  ${({ theme, disabled }) => css`
+    ${disabled && wrapperModifiers.disabled(theme)}
   `}
 `
