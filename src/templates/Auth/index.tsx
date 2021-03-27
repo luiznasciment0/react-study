@@ -25,12 +25,14 @@ const Auth = ({ title, children }: AuthProps) => (
     </S.BannerBlock>
 
     <S.Content>
-      <Logo color="black" size="large" />
-      <Heading color="black" lineColor="secondary" lineLeft>
-        {title}
-      </Heading>
+      <S.ContentWrapper>
+        <Logo color="black" size="large" />
+        <Heading color="black" lineColor="secondary" lineLeft>
+          {title}
+        </Heading>
 
-      {children}
+        {children}
+      </S.ContentWrapper>
     </S.Content>
   </S.Wrapper>
 )
