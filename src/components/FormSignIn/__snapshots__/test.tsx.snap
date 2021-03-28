@@ -83,7 +83,7 @@ exports[`<FormSignIn /> should render the form 1`] = `
 }
 
 .c0 .c7 {
-  margin: 3.2rem auto 0.8rem;
+  margin: 3.2rem auto 1.6rem;
 }
 
 .c9 {
@@ -97,7 +97,8 @@ exports[`<FormSignIn /> should render the form 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   border-bottom: 0.1rem solid #3CD3C1;
-  tansition: color,border,0.1s ease-in-out;
+  -webkit-transition: color,border,0.1s ease-in-out;
+  transition: color,border,0.1s ease-in-out;
 }
 
 .c9 a:hover {
@@ -118,7 +119,7 @@ exports[`<FormSignIn /> should render the form 1`] = `
 
 <body>
   <div>
-    <main
+    <div
       class="c0"
     >
       <form>
@@ -224,7 +225,7 @@ exports[`<FormSignIn /> should render the form 1`] = `
           </a>
         </div>
       </form>
-    </main>
+    </div>
   </div>
 </body>
 `;
