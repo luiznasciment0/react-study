@@ -1,4 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react'
+import theme from 'styles/theme'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import GameCard from '.'
@@ -12,7 +13,7 @@ const props = {
 
 describe('<GameCard />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<GameCard {...props} />)
+    const { container } = renderWithTheme(<GameCard {...props} />)
 
     expect(
       screen.getByRole('heading', { name: props.title })
@@ -28,6 +29,8 @@ describe('<GameCard />', () => {
     )
 
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render price in label', () => {
@@ -36,18 +39,19 @@ describe('<GameCard />', () => {
     const price = screen.getByText('R$ 235,00')
 
     expect(price).not.toHaveStyle({ textDecoration: 'line-through' })
-
-    expect(price).toHaveStyle({ backgroundColor: '#3CD3C1' })
+    expect(price).toHaveStyle({ backgroundColor: theme.colors.secondary })
   })
 
-  it('should render a line through in price when promotional', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice={'R$ 15,00'} />)
+  it('should render a line-through in price when promotional', () => {
+    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 15,00" />)
 
-    const price = screen.getByText('R$ 235,00')
-    expect(price).toHaveStyle({ textDecoration: 'line-through' })
+    expect(screen.getByText('R$ 235,00')).toHaveStyle({
+      textDecoration: 'line-through'
+    })
 
-    const promotionalPrice = screen.getByText('R$ 15,00')
-    expect(promotionalPrice).not.toHaveStyle({ textDecoration: 'line-through' })
+    expect(screen.getByText('R$ 15,00')).not.toHaveStyle({
+      textDecoration: 'line-through'
+    })
   })
 
   it('should render a filled Favorite icon when favorite is true', () => {
@@ -64,24 +68,20 @@ describe('<GameCard />', () => {
 
     expect(onFav).toBeCalled()
   })
-})
 
-it('should render a Ribbon', () => {
-  renderWithTheme(
-    <GameCard
-      {...props}
-      ribbon="My Ribbon"
-      ribbonSize="small"
-      ribbonColor="secondary"
-    />
-  )
+  it('should render Ribbon', () => {
+    renderWithTheme(
+      <GameCard
+        {...props}
+        ribbon="My Ribbon"
+        ribbonColor="secondary"
+        ribbonSize="small"
+      />
+    )
+    const ribbon = screen.getByText(/my ribbon/i)
 
-  const ribbon = screen.getByText(/My Ribbon/i)
-
-  expect(ribbon).toBeInTheDocument()
-  expect(ribbon).toHaveStyle({ backgroundColor: '#3CD3C1' })
-  expect(ribbon).toHaveStyle({
-    height: '2.6rem',
-    fontSize: '1.2rem'
+    expect(ribbon).toHaveStyle({ backgroundColor: '#3CD3C1' })
+    expect(ribbon).toHaveStyle({ height: '2.6rem', fontSize: '1.2rem' })
+    expect(ribbon).toBeInTheDocument()
   })
 })
