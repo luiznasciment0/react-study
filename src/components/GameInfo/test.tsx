@@ -6,22 +6,22 @@ import GameInfo from '.'
 const props = {
   title: 'My Game Title',
   description: 'Game Description',
-  price: '210.00'
+  price: '210,00'
 }
 
 describe('<GameInfo />', () => {
-  it('should render the heading', () => {
-    renderWithTheme(<GameInfo {...props} />)
+  it('should render game informations', () => {
+    const { container } = renderWithTheme(<GameInfo {...props} />)
 
     expect(
       screen.getByRole('heading', { name: /my game title/i })
     ).toBeInTheDocument()
 
-    expect(
-      screen.getByRole('heading', { name: /game description/i })
-    ).toBeInTheDocument()
+    expect(screen.getByText(/game description/i)).toBeInTheDocument()
 
-    expect(screen.getByText(/210.00/i)).toBeInTheDocument()
+    expect(screen.getByText(/\$210,00/)).toBeInTheDocument()
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render buttons', () => {
