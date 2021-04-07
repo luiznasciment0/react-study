@@ -4,7 +4,9 @@ import GameDetails from '.'
 
 describe('<GameDetails />', () => {
   it('should render the heading', () => {
-    const { container } = render(<GameDetails />)
+    const { container } = render(
+      <GameDetails platforms={['windows', 'linux', 'mac']} />
+    )
 
     expect(
       screen.getByRole('heading', { name: /GameDetails/i })
