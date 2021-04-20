@@ -7,16 +7,22 @@ import * as S from './styles'
 
 type Platform = 'windows' | 'linux' | 'mac'
 
+type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
+
 export type GameDetailsProps = {
   developer: string
   platforms: Platform[]
   releaseDate: string
+  rating: Rating
+  genres: string[]
 }
 
 const GameDetails = ({
-  platforms,
   developer,
-  releaseDate
+  releaseDate,
+  platforms,
+  rating,
+  genres
 }: GameDetailsProps) => {
   const platformIcons = {
     linux: <Linux title="Linux" size={18} />,
@@ -28,7 +34,7 @@ const GameDetails = ({
     <S.Wrapper>
       <MediaMatch greaterThan="small">
         <Heading lineLeft lineColor="secondary">
-          GameDetails
+          Game Details
         </Heading>
       </MediaMatch>
 
@@ -52,8 +58,8 @@ const GameDetails = ({
         <S.Block>
           <S.Label>Platforms</S.Label>
           <S.IconsWrapper>
-            {platforms.map((platform) => (
-              <S.Icon key={platform}>{platformIcons[platform]}</S.Icon>
+            {platforms.map((icon: Platform) => (
+              <S.Icon key={icon}>{platformIcons[icon]}</S.Icon>
             ))}
           </S.IconsWrapper>
         </S.Block>
@@ -65,12 +71,14 @@ const GameDetails = ({
 
         <S.Block>
           <S.Label>Rating</S.Label>
-          <S.Description>18+</S.Description>
+          <S.Description>
+            {rating === 'BR0' ? 'FREE' : `${rating.replace('BR', '')}+`}
+          </S.Description>
         </S.Block>
 
         <S.Block>
           <S.Label>Genres</S.Label>
-          <S.Description>Action / Adventure</S.Description>
+          <S.Description>{genres.join(' / ')}</S.Description>
         </S.Block>
       </S.Content>
     </S.Wrapper>
